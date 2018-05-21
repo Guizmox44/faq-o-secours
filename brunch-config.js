@@ -4,8 +4,6 @@ exports.config = {
         javascripts: {
             joinTo: {
                 'js/app.js': /^front/,
-                'js/calendar.js': /^front/,
-                'js/editlist.js': /^front/,
                 'js/search.js': /^front/,
                 'js/vendor.js': /^node_modules/,
             }
@@ -37,8 +35,6 @@ exports.config = {
     modules: {
         autoRequire: {
             "js/app.js": ["front/js/app"],
-            "js/calendar.js": ["front/js/calendar"],
-            "js/editlist.js": ["front/js/editlist"],
             "js/search.js": ["front/js/search"],
         }
     },
