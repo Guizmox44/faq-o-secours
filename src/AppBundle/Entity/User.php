@@ -3,6 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -56,6 +60,27 @@ class User
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Ajouter une image jpg ou png")
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"  })
+     */
+    private $picture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Role", cascade={"persist"} )
+     */
+    private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="user")
+     */
+    private $questions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Response", mappedBy="user")
+     */
+    private $responses;
 
     /**
      * Get id
@@ -186,5 +211,128 @@ class User
     {
         return $this->password;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->responses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return User
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set role
+     *
+     * @param \AppBundle\Entity\Role $role
+     *
+     * @return User
+     */
+    public function setRole(\AppBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return \AppBundle\Entity\Role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \AppBundle\Entity\Question $question
+     *
+     * @return User
+     */
+    public function addQuestion(\AppBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \AppBundle\Entity\Question $question
+     */
+    public function removeQuestion(\AppBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Add response
+     *
+     * @param \AppBundle\Entity\Response $response
+     *
+     * @return User
+     */
+    public function addResponse(\AppBundle\Entity\Response $response)
+    {
+        $this->responses[] = $response;
+
+        return $this;
+    }
+
+    /**
+     * Remove response
+     *
+     * @param \AppBundle\Entity\Response $response
+     */
+    public function removeResponse(\AppBundle\Entity\Response $response)
+    {
+        $this->responses->removeElement($response);
+    }
+
+    /**
+     * Get responses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResponses()
+    {
+        return $this->responses;
+    }
+}
