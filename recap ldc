@@ -9,3 +9,5 @@ php bin/console doctrine:schema:validate -> validation du schéma des entités
 php bin/console doctrine:schema:update --force -> importation entités dans BDD de phpmyadmin
 
 php bin/console doctrine:generate:entities -> génération des getters/setters
+
+php bin/console doctrine:generate:form -> génération formulaire
