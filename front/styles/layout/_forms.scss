@@ -1,0 +1,11 @@
+.form-container{
+  background-color: $background-color-form;
+  border-top: 2px solid $color-form-active;
+  color: $color-text-form;
+  margin-bottom: 58px;
+  width: 55%;
+
+  & hr{
+    background-color: $color-form-active;
+  }
+}

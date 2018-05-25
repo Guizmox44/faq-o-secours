@@ -3,7 +3,59 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+
+    <div class="container form-container mt-5">
+        <h2 class="mt-3 mb-2">Formulaire d'inscription</h2>
+        <div class="container mt-3">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-5">
+                    {{ form_label(form.email.first) }}
+                    {{ form_widget(form.email.first) }}
+                </div>
+                <div class="col-md-5">
+                    {{ form_label(form.email.second) }}
+                    {{ form_widget(form.email.second) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-5">
+                    {{ form_label(form.password.first) }}
+                    {{ form_widget(form.password.first) }}
+                </div>
+                <div class="col-md-5">
+                    {{ form_label(form.password.second) }}
+                    {{ form_widget(form.password.second) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-5">
+                    {{ form_label(form.city) }}
+                    {{ form_widget(form.city) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_label(form.zipcode) }}
+                    {{ form_widget(form.zipcode) }}
+                </div>
+            </div>
+                <div class="mt-2">
+                    {{ form_label(form.agreeTerms) }}
+                    {{ form_widget(form.agreeTerms) }}
+                </div>
+            <input class="mt-4 mb-2" type="submit" value="Créer le compte">
+            {{ form_end(form) }}
+        </div>
+        <hr>
+        <p class="p-1 pl-3">Déjà inscrit ? <a href="#">Se connecter</a></p>
+
+        <a class="btn info-cgu" href="#">Conditions générales d'utilisation</a>
+    </div>
+
 {% endblock %}
