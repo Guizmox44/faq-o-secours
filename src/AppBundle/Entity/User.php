@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -59,13 +60,6 @@ class User
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Ajouter une image jpg ou png")
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"  })
-     */
-    private $picture;
 
     /**
      * @ORM\ManyToOne(targetEntity="Role", cascade={"persist"} )
@@ -234,15 +228,6 @@ class User
         return $this;
     }
 
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
 
     /**
      * Set role
@@ -265,7 +250,18 @@ class User
      */
     public function getRole()
     {
-        return $this->role;
+        return [$this->getRole()->getCode()];
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
     }
 
     /**
@@ -334,5 +330,29 @@ class User
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return User
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

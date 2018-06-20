@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <h1 class="btn btn-danger">Bonjour</h1>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+         <a href="#">Bienvenue {{ app.user }}</a>
+      {% else %}
+          <a href="{{ path('signin') }}" class="btn btn-secondary" >Inscription</a>
+          <a href="{{ path('login') }}" class="btn btn-secondary" >Connexion</a>
+      {% endif %}
 {% endblock %}

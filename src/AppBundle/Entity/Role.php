@@ -93,4 +93,9 @@ class Role
     {
         return $this->code;
     }
+
+    public function __toString()
+    {
+        return $this->label;
+    }
 }

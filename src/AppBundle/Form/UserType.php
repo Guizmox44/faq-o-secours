@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -43,6 +44,7 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'invalid_message' =>'Les mots de passe ne correspondent pas',
             ])
+
             ->add('agreeTerms', CheckboxType::class, array('mapped' => false,
                 'label' => ' J\' accepte les conditions générales d\'utilisation',
                 'constraints' => array(new NotBlank(array('message' => 'Veuillez accepter les conditions générales d\'utilisation'))
