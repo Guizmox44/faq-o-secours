@@ -23,11 +23,9 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                csrf_token_generator: security.csrf.token_manager
-
-            provider: user_db
-
-            logout:
-                path: /logout
-                target: /
-
+                default_target_path: default_security_target
+                always_use_default_target_path: true
+                
+     access_control:
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, roles: ROLE_ADMIN }
